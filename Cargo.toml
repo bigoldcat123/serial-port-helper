@@ -1,0 +1,11 @@
+[package]
+name = "usb-play"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+env_logger = "0.11.8"
+futures = "0.3.31"
+log = "0.4.27"
+nusb = {version = "0.1.14",features = []}
+tokio = { version = "1.45.1", features = ["rt", "macros","time","sync"] }
