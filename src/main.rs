@@ -14,12 +14,15 @@ async fn main() {
     println!("{:#?}", device.active_configuration());
     device.detach_and_claim_interface(0x01).unwrap();
     let interface = device.claim_interface(0x01).unwrap();
+    
     let mut out = stdout();
     let in_ = stdin();
     let interface_in = interface.clone();
+
     let (tx, rx) = channel(8);
     let reader = UsbReader::new(interface_in, tx);
     tokio::spawn(async { reader.run().await });
+
     let mut writer = UsbWriter::new(interface, rx);
     loop {
         let mut cmd = String::new();
